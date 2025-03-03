@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frameworks-web": {
+    "TODOapp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/frameworks-web",
+            "outputPath": "dist/todoapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "frameworks-web:build:production"
+              "buildTarget": "TODOapp:build:production"
             },
             "development": {
-              "buildTarget": "frameworks-web:build:development"
+              "buildTarget": "TODOapp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -107,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "85e8745f-4bec-48f6-9c74-56ceb1c05d78"
   }
 }

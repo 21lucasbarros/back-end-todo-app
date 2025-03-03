@@ -1,11 +1,19 @@
 <div class="main">
   <h1>Mozilla Dev - My To Do List</h1>
-  <input class="lg-text-input" #campoNovoItem (keydown.enter)="CREATE_tarefa(campoNovoItem.value); campoNovoItem.value=''"/>
-  <button class="btn-primary" (click)="CREATE_tarefa(campoNovoItem.value); campoNovoItem.value=''">
-    Adicionar Tarefa</button>
+  <input
+    class="lg-text-input"
+    #campoNovoItem
+    (keyup.enter)="CREATE_tarefa(campoNovoItem.value); campoNovoItem.value = ''"
+  />
+  <button class="btn-primary" (click)="CREATE_tarefa(campoNovoItem.value)">
+    Adicionar Tarefa
+  </button>
   <ul>
     <li *ngFor="let tarefaDoLoop of arrayDeTarefas">
-      <app-item [tarefa]="tarefaDoLoop"></app-item>
+      <app-item
+        [tarefa]="tarefaDoLoop"
+        (removerTarefa)="DELETE_tarefa($event)"
+      ></app-item>
     </li>
   </ul>
 </div>
