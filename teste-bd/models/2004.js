@@ -1,22 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const schemaPartidas = new mongoose.Schema({
+const schemaPartidas = new mongoose.Schema(
+  {
     time1: {
-        required: true,
-        type: String
+      required: true,
+      type: String,
     },
     time2: {
-        required: true,
-        type: String
+      required: true,
+      type: String,
     },
     placar: {
-        required: true,
-        type: String
+      required: true,
+      type: String,
     },
-},
-    {
-        versionKey: false
-    }
-)
+  },
+  {
+    versionKey: false,
+  }
+);
 
-module.exports = mongoose.model('Partida', schemaPartidas, '2004')
+module.exports = mongoose.model("Partida", schemaPartidas, "2004");
