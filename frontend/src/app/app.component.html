@@ -1,0 +1,43 @@
+<div class="main">
+  <h1>Lucas Barros 235182 - João Del 235126</h1>
+
+  <div *ngIf="usuarioLogado">
+    <div class="input-group">
+      <input
+        class="lg-text-input"
+        #campoNovoItem
+        placeholder="Digite sua tarefa"
+        (keyup.enter)="
+          CREATE_tarefa(campoNovoItem.value); campoNovoItem.value = ''
+        "
+      />
+      <button
+        class="btn-primary"
+        (click)="CREATE_tarefa(campoNovoItem.value); campoNovoItem.value = ''"
+      >
+        Adicionar
+      </button>
+      <span class="erro-validacao" *ngIf="mostrarErro">
+        ERRO: Por favor, digite uma tarefa.
+      </span>
+    </div>
+
+    <ul>
+      <li *ngFor="let tarefaDoLoop of arrayDeTarefas">
+        <app-item
+          [tarefa]="tarefaDoLoop"
+          (removerTarefa)="DELETE_tarefa($event)"
+          (modificaTarefa)="UPDATE_tarefa(tarefaDoLoop)"
+        ></app-item>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!usuarioLogado">
+    <input #username placeholder="nome" class="lg-text-input" />
+    <br />
+    <input #password placeholder="senha" class="lg-text-input" />
+    <button class="btn-primary" (click)="login(username.value, password.value)">
+      Login
+    </button>
+  </div>
+</div>

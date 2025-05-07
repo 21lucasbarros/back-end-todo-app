@@ -1,0 +1,148 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2% 1%;
+  border-radius: 8px;
+}
+
+.item-item {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.item-item input[type="checkbox"] {
+  width: 1.3rem;
+  height: 1.3rem;
+  accent-color: #1f2937;
+  cursor: pointer;
+}
+
+.item-item input[type="checkbox"]:checked + label {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.item-item label {
+  font-family: var(--font-inter);
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn,
+.btn-warn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+
+  i {
+    font-size: 1.25rem;
+  }
+}
+
+.btn {
+  background-color: #2563eb;
+}
+
+.btn:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.btn-warn {
+  background-color: #dc2626;
+}
+
+.btn-warn:hover {
+  background-color: #b91c1c;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.edicao {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.sm-text-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #1f2937;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.sm-text-input:focus {
+  border-color: #1f2937;
+}
+
+.sm-text-input::placeholder {
+  color: #9ca3af;
+}
+
+.btns {
+  display: flex;
+  gap: 15px;
+}
+
+.btns .btn-cancel {
+  background-color: #dc2626;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-family: var(--font-inter);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btns .btn-cancel:hover {
+  background-color: #b91c1c;
+  transition: all 0.2s ease-in-out;
+}
+
+.btns .btn-save {
+  background-color: #2563eb;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-family: var(--font-inter);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btns .btn-save:hover {
+  background-color: #1d4ed8;
+  transition: all 0.2s ease-in-out;
+}
+
+.erro-validacao {
+  text-align: center;
+  color: red;
+  font-family: var(--font-inter);
+}
