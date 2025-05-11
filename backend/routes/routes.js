@@ -60,7 +60,6 @@ function verificaUsuarioSenha(req, res, next) {
   next();
 }
 
-//Autenticacao
 //Segunda forma de Autenticacao - Busca usuário no BD e compara senha
 const userModel = require("../models/user");
 
