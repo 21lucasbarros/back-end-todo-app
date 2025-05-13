@@ -1,4 +1,13 @@
 <div class="main">
+  <div class="user-bar">
+    <button *ngIf="adminLogado" class="btn-panel" (click)="abrirPainelAdmin()">
+      <i class="ri-user-settings-line"></i>
+    </button>
+    <button *ngIf="usuarioLogado" class="btn-logout" (click)="logout()">
+      <i class="ri-logout-box-line"></i>
+    </button>
+  </div>
+
   <h1>Lucas Barros 235182 - João Del 235126</h1>
 
   <div *ngIf="usuarioLogado">
@@ -32,12 +41,37 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="!usuarioLogado">
-    <input #username placeholder="nome" class="lg-text-input" />
-    <br />
-    <input #password placeholder="senha" class="lg-text-input" />
+
+  <div *ngIf="!usuarioLogado" class="login">
+    <div class="input-container">
+      <div class="icon-container">
+        <i class="ri-user-line"></i>
+      </div>
+      <input #username placeholder="Nome" class="lg-text-input with-icon" />
+    </div>
+
+    <div class="input-container">
+      <div class="icon-container">
+        <i class="ri-lock-line"></i>
+      </div>
+      <input
+        #password
+        placeholder="Senha"
+        class="lg-text-input with-icon"
+        type="password"
+      />
+    </div>
+
     <button class="btn-primary" (click)="login(username.value, password.value)">
       Login
     </button>
+    <span class="erro-validacao" *ngIf="mostrarErroLogin">
+      ERRO: Usuário não encontrado ou senha incorreta.
+    </span>
   </div>
 </div>
+
+<app-admin-usuarios
+  *ngIf="mostrarAdminPanel"
+  (fecharModal)="mostrarAdminPanel = false"
+></app-admin-usuarios>

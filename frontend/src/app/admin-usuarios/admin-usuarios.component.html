@@ -1,0 +1,57 @@
+<div class="modal-overlay" (click)="closeAdminPanel($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="btn-close" (click)="closeAdminPanel($event)">
+      <i class="ri-close-fill"></i>
+    </button>
+    <h2>Painel de Usuários (Admin)</h2>
+
+    <div class="input-group">
+      <h3>Criar Novo Usuário</h3>
+      <input
+        [(ngModel)]="novoUsuario.nome"
+        placeholder="Nome"
+        class="lg-text-input"
+      />
+      <input
+        [(ngModel)]="novoUsuario.senha"
+        placeholder="Senha"
+        class="lg-text-input"
+        type="password"
+      />
+      <label>
+        <input type="checkbox" [(ngModel)]="novoUsuario.admin" /> Admin
+      </label>
+      <button class="btn-primary" (click)="criarUsuario()">
+        Criar Usuário
+      </button>
+    </div>
+
+    <hr />
+
+    <ul>
+      <li *ngFor="let u of usuarios">
+        <div class="input-group">
+          <input
+            [(ngModel)]="u.nome"
+            class="lg-text-input"
+            placeholder="Nome"
+          />
+          <input
+            [(ngModel)]="u.senha"
+            class="lg-text-input"
+            type="password"
+            placeholder="Senha"
+          />
+          <label> <input type="checkbox" [(ngModel)]="u.admin" /> Admin </label>
+        </div>
+
+        <div class="button-group">
+          <button class="btn-primary" (click)="salvarUsuario(u)">Salvar</button>
+          <button class="btn-primary" (click)="deletarUsuario(u._id)">
+            Excluir
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

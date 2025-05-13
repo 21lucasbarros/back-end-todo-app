@@ -11,11 +11,11 @@ export class ItemComponent {
   emEdicao = false;
   mostrarErro = false;
   @Input() tarefa: Tarefa = new Tarefa('', false);
-  @Output() removerTarefa = new EventEmitter<Tarefa>(); // Evento para remover a tarefa;
+  @Output() removerTarefa = new EventEmitter<Tarefa>();
   @Output() modificaTarefa = new EventEmitter();
 
   onRemoverTarefa() {
-    this.removerTarefa.emit(this.tarefa); // Emite a tarefa a ser removida
+    this.removerTarefa.emit(this.tarefa);
   }
 
   salvarEdicao(editedValue: string) {
@@ -27,5 +27,10 @@ export class ItemComponent {
     } else {
       this.mostrarErro = true;
     }
+  }
+
+  cancelarEdicao() {
+    this.emEdicao = false;
+    this.mostrarErro = false;
   }
 }
