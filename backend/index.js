@@ -35,8 +35,7 @@ app.listen(PORT, () => {
 });
 
 // Conexão com MongoDB
-const mongoURL =
-  "mongodb+srv://lucas235182:21022003@cluster0.yrdjb.mongodb.net/tarefasDB?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURL = process.env.MONGODB_URI || process.argv[2];
 if (!mongoURL) {
   console.error("⚠️ Nenhuma URL do MongoDB foi fornecida!");
   process.exit(1);
