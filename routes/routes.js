@@ -106,7 +106,7 @@ async function verificaAdmin(req, res, next) {
 router.post("/login", async (req, res) => {
   try {
     const data = await userModel.findOne({ nome: req.body.nome });
-    if (data != null && data.senha === req.body.senha) {
+    if (data != null && validPassword(req.body.senha, data.hash, data.salt)) {
       const token = jwt.sign(
         {
           id: data._id,
@@ -126,12 +126,39 @@ router.post("/login", async (req, res) => {
 
 // CRUD de usuários (admin only)
 
-// CREATE
+// CREATE (Admin Only)
 router.post("/users", verificaJWT, verificaAdmin, async (req, res) => {
   try {
-    const user = new userModel(req.body);
+    const { nome, senha, admin } = req.body;
+
+    if (!nome || !senha) {
+      return res.status(400).json({ message: "Nome e senha são obrigatórios" });
+    }
+
+    // Gerar salt aleatório
+    const salt = randomBytes(16).toString("hex");
+
+    // Criar hash da senha + salt
+    const hash = createHash("sha256")
+      .update(senha + salt)
+      .digest("hex");
+
+    // Criar objeto de usuário com hash e salt
+    const user = new userModel({
+      nome: nome,
+      hash: hash,
+      salt: salt,
+      admin: admin || false,
+    });
+
     await user.save();
-    res.json(user);
+
+    // Retorna o usuário criado, sem a senha
+    res.status(201).json({
+      _id: user._id,
+      nome: user.nome,
+      admin: user.admin,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -170,3 +197,40 @@ router.delete("/users/:id", verificaJWT, verificaAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
+function validPassword(senha, hashBD, saltBD) {
+  hashCalculado = createHash("sha256")
+    .update(senha + saltBD)
+    .digest("hex");
+  return hashCalculado === hashBD;
+}
+
+const { createHash, randomBytes } = require("crypto");
+
+// Rota de cadastro de usuário
+router.post("/register", async (req, res) => {
+  try {
+    const { nome, senha, admin } = req.body;
+
+    // Gera um salt aleatório
+    const salt = randomBytes(16).toString("hex");
+
+    // Calcula o hash da senha + salt
+    const hash = createHash("sha256")
+      .update(senha + salt)
+      .digest("hex");
+
+    const user = new userModel({
+      nome: nome,
+      hash: hash,
+      salt: salt,
+      admin: admin || false,
+    });
+
+    await user.save();
+
+    res.status(201).json({ message: "Usuário criado com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
